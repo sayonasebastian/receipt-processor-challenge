@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receipt processor challenge</title>
+    <script>
+      async function addProcess() {
+        var value = document.getElementById("processInput").value;
+        console.log(value);
+        const response = await fetch("/receipts/process", {
+          method: "POST",
+          body: JSON.stringify(value),
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Welcome Receipt processor</h1>
+    <textarea
+      id="processInput"
+      class="text-input"
+      name="bigTextBox"
+      placeholder="Enter the json..."
+    ></textarea>
+    <button onclick="addProcess()">Post</button>
+    <textarea
+      id="processOutput"
+      class="text-input"
+      name="bigTextBox"
+      placeholder="Enter id..."
+    ></textarea>
+    <button>Get</button>
+  </body>
+</html>
