@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
+
 const processes = new Map();
 
 const calculatePoints = function (obj) {
@@ -29,23 +30,24 @@ const calculatePoints = function (obj) {
 app.post('/receipts/process', (req, res) => {
   const { data } = req.body;
   const id = uuidv4();
+  if (!data || typeof data !== 'object') {
+    return res.status(404).json({ error: 'The receipt is invalid' });
+  }
   try {
     processes.set(id, { data, points: calculatePoints(data) });
-    res.json({ id });
+    res.status(200).json({ id });
   } catch {
-    res.status(400).json({ error: 'Invalid json' });
+    res.status(404).json({ error: 'The receipt is invalid' });
   }
 });
 
 app.get('/receipts/:id/points', (req, res) => {
   const { id } = req.params;
-  let points
   if (processes.has(id)) {
-    points = processes.get(id).points
+    const points = processes.get(id).points;
+    res.status(200).json({ points });
   }
-  ;
-  const response = points ? { points } : { message: "id not present" }
-  res.json(response);
+  res.status(404).json({ error: 'No receipt found for that id' });
 });
 
 app.get('/', (req, res) => {
