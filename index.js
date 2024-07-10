@@ -47,7 +47,9 @@ app.get('/receipts/:id/points', (req, res) => {
     const points = processes.get(id).points;
     res.status(200).json({ points });
   }
-  res.status(404).json({ error: 'No receipt found for that id' });
+  else {
+    res.status(404).json({ error: 'No receipt found for that id' });
+  }
 });
 
 app.get('/', (req, res) => {
