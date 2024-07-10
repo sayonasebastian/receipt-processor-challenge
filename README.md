@@ -24,12 +24,21 @@ A simple receipt processor
 
 ## Running the Server
 
-To start the server, run:
+To start the server on your local machine, run. This will run on port 3000:
 
 ```sh
 npm start
 ```
 
 ## Use Dockerfile to run the application
-- `docker build . -t receipt-processor:latest` this will create the docker image
-- `docker run --name receipts -d -p 3000:3000 receipt-processor` this will create the container and run the container in detached mode on port 3000.  
+
+To create a docker image
+```sh
+docker build . -t receipt-processor:latest
+```
+
+To create a container and run the container in detached mode on port 3000
+
+```sh
+docker run --name receipts -d -p 3000:3000 receipt-processor
+```
