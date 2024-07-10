@@ -23,7 +23,6 @@ const calculatePoints = function (obj) {
     var l = value.shortDescription.trim().length;
     return total + Math.ceil(l % 3 === 0 ? value.price * 0.2 : 0);
   }, 0);
-  console.log(new Date(obj.purchaseDate));
   points += (new Date(obj.purchaseDate)).getDate() % 2 !== 0 ? 6 : 0;
   points += (new Date(`${obj.purchaseDate} ${obj.purchaseTime}`)) > (new Date(`${obj.purchaseDate} 14:00`))
   && (new Date(`${obj.purchaseDate} ${obj.purchaseTime}`)) < (new Date(`${obj.purchaseDate} 16:00`)) ? 10 : 0;
