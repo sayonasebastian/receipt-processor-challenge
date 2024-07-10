@@ -28,3 +28,8 @@ To start the server, run:
 
 ```sh
 npm start
+```
+
+## Use Dockerfile to run the application
+- `docker build . -t receipt-processor:latest` this will create the docker image
+- `docker run --name receipts -d -p 3000:3000 receipt-processor` this will create the container and run the container in detached mode on port 3000.  
